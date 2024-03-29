@@ -5,7 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 class CalculatorTest {
 
@@ -116,7 +119,30 @@ class CalculatorTest {
 
     @SuppressWarnings("unused")
     public static int[][] testData() {
-        return new int[][]{{1, 1, 2}, {2, 3, 5}, {9, 8, 17}, {2, 19, 21}};
+        return new int[][]{
+                {1, 1, 2},
+                {2, 3, 5},
+                {9, 8, 17},
+                {2, 19, 21}
+        };
+    }
+
+   @ParameterizedTest
+   @MethodSource
+    void testParametrizedAdding2(int left, int right, int expected) {
+// given, when
+        Integer result = calculator.add(left, right);
+// then
+        Assertions.assertEquals(expected, result);
+    }
+    @SuppressWarnings("unused")
+    public static Stream<Arguments> testParametrizedAdding2() {
+        return Stream.of(
+                Arguments.of(1, 1, 2),
+                Arguments.of(2, 3, 5),
+                Arguments.of(9, 8, 17),
+                Arguments.of(2, 19, 21)
+        );
     }
 
 
