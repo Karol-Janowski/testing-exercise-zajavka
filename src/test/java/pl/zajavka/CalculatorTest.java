@@ -2,6 +2,7 @@ package pl.zajavka;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
@@ -12,6 +13,7 @@ class CalculatorTest {
        calculator = new Calculator();
     }
     @Test
+    @DisplayName("Simple calculator addition should work correctly")
     void addTest() {
         //given
         int left = 10;
