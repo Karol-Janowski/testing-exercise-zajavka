@@ -69,5 +69,26 @@ class CalculatorTest {
         Assertions.assertEquals(expected, result);
     }
 
+    @Test
+    void someTest() {
+        Assertions.assertEquals(1, 1, createMessage(1));
+        Assertions.assertEquals(1, 1, () -> createMessage(2));
+        Assertions.assertEquals(1, 2, () -> createMessage(3));
+    }
+
+    private String createMessage(int i) {
+        System.out.println("Evaluating failure message: " + i);
+        return "failure message";
+    }
+
+    @Test
+    void assertAllTest() {
+        Assertions.assertAll(
+                () -> Assertions.assertEquals("test1", "test1", createMessage(1)),
+                () -> Assertions.assertEquals("test1", "test2", () -> createMessage(2)),
+                () -> Assertions.assertEquals("test1", "test4", () -> createMessage(3))
+        );
+    }
+
 
 }
